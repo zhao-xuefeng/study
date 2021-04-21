@@ -6,3 +6,4 @@ kafka/target/
 mysql/target/
 readYarnConf/target/
 target/
+dependency-reduced-pom.xml
