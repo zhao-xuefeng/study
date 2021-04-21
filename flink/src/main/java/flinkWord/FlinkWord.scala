@@ -11,7 +11,8 @@ object FlinkWord {
 //    var source =env.readTextFile("person")
     val source = env.fromElements("china is the best country","beijing is the capital of china")
     //转化处理数据
-    val ds = source.flatMap(_.split(" ")).map((_,1)).groupBy(0).sum(1)
+
+    val ds = source.flatMap(_.split(" ")).map(x=>(x,1)).groupBy(0).sum(1)
     //输出至目的端
     ds.print()
     // 执行操作

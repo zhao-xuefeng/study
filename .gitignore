@@ -1,3 +1,8 @@
 .idea
 *.iml
-
+es/target/
+flink/target/
+kafka/target/
+mysql/target/
+readYarnConf/target/
+target/

@@ -20,7 +20,7 @@ public class FlinkSqlDemoJ {
         ExecutionEnvironment env=ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment fbTableEnv = BatchTableEnvironment.create(env);
 
-        DataSet<String> dataSet=env.readTextFile("D:\\privateLearn\\data\\person.txt");
+        DataSet<String> dataSet=env.readTextFile("person");
 
 //        DataSet<Tuple2<String,String>> dataSet1=dataSet.map(new MapFunction<String, Tuple2<String, String>>() {
 //            @Override
