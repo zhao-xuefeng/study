@@ -33,7 +33,7 @@ public class JavaWordcount {
             }
         });
         UnsortedGrouping<Tuple2<String,Integer>> grouping=mapData.groupBy(0);
-
+// 通过设置 并行度 发现 ，并行度太大  会导致有得分区数据为空，可以联想到kafka 分区与flink的并行度设置
         AggregateOperator<Tuple2<String,Integer>> s=grouping.sum(1).setParallelism(8);
         s.sortPartition(1,Order.DESCENDING).print("(********)");
         System.out.println("-----------------------------------");
