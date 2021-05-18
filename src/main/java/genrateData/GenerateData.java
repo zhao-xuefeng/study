@@ -25,7 +25,7 @@ public class GenerateData {
         ChineseAddressGenerator cag = (ChineseAddressGenerator) ChineseAddressGenerator.getInstance();
 
         PrintWriter pw = new PrintWriter("D:\\data_1000w.csv");
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 10; i++) {
             StringJoiner sj = new StringJoiner(",");
             sj.add(cidcng.generate());
             sj.add(cng.generate());
