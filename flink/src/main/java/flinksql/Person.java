@@ -4,6 +4,13 @@ public class Person {
     private String name;
     private String age;
 
+    public Person(String name,String age){
+        this.name=name;
+        this.age=age;
+    }
+    public Person(){
+    }
+
     public String getName() {
         return name;
     }
@@ -18,5 +25,13 @@ public class Person {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }

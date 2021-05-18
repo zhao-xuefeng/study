@@ -1,14 +1,11 @@
 package flinkWord;
 
-import groovy.lang.Tuple;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.AggregateOperator;
-import org.apache.flink.api.java.operators.FlatMapOperator;
-import org.apache.flink.api.java.operators.MapOperator;
 import org.apache.flink.api.java.operators.UnsortedGrouping;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
@@ -33,13 +30,12 @@ public class JavaWordcount {
             }
         });
         UnsortedGrouping<Tuple2<String,Integer>> grouping=mapData.groupBy(0);
-// 通过设置 并行度 发现 ，并行度太大  会导致有得分区数据为空，可以联想到kafka 分区与flink的并行度设置
+// 通过设置 并行度 发现 ，并行度太大  会导致有得分区数据为空，可以联想到kafka分区与flink并行度的设置
         AggregateOperator<Tuple2<String,Integer>> s=grouping.sum(1).setParallelism(8);
-        s.sortPartition(1,Order.DESCENDING).print("(********)");
+//
+//        区内有序，若多个并行度 就是各个线程之内的有序
+//        s.sortPartition(1,Order.DESCENDING).print("(********)");
         System.out.println("-----------------------------------");
         s.sortPartition(1, Order.DESCENDING).print();
-
-
-
     }
 }

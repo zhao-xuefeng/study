@@ -19,7 +19,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.myself</groupId>
+            <groupId>org.private</groupId>
             <artifactId>mysql</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

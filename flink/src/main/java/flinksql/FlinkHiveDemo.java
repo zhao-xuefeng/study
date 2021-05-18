@@ -6,6 +6,7 @@ import org.apache.flink.table.api.EnvironmentSettings;
 
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+import org.apache.flink.table.api.bridge.scala.BatchTableEnvironment;
 import org.apache.flink.table.catalog.Catalog;
 import org.apache.flink.table.catalog.hive.HiveCatalog;
 
@@ -16,6 +17,7 @@ public class FlinkHiveDemo {
 //        EnvironmentSettings settings=EnvironmentSettings.newInstance().useOldPlanner().inStreamingMode().build();
 //
 //        StreamTableEnvironment tableEnv = StreamTableEnvironment.create(bsEnv, settings);
+
         TableEnvironment tableEnv = TableEnvironment.create(settings);
         String name            = "hive";
         String defaultDatabase = "myflink";

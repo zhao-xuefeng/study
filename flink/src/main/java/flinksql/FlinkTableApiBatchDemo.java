@@ -15,7 +15,6 @@ public class FlinkTableApiBatchDemo {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment benv = BatchTableEnvironment.create(env);
 
-
         DataSet<StudentsInfo> dataSet =
                 env.readCsvFile("D:\\privateLearn\\data\\ss.csv")
                         .ignoreFirstLine().
