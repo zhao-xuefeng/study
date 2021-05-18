@@ -3,12 +3,6 @@ package flink.api.train.streaming;
 
 import com.properties.util.PropertiesUtil;
 
-//import org.apache.flink.streaming.api.datastream.DataStreamSource;
-//import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment;
-//import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-//import org.apache.flink.streaming.util.serialization.JSONKeyValueDeserializationSchema;
-
-//import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
@@ -23,9 +17,6 @@ import org.apache.flink.util.Collector;
 public class StreamKafka {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment stenv = StreamExecutionEnvironment.getExecutionEnvironment();
-//        FlinkKafkaConsumer<ObjectNode> consumer=new FlinkKafkaConsumer<ObjectNode>("topic_1",
-//                new JSONKeyValueDeserializationSchema(true),
-//                PropertiesUtil.getConsumerProperties());
 //
         DataStreamSource<ObjectNode> dataStreamSource = stenv.addSource(new FlinkKafkaConsumer<>("topic_1",
                 new JSONKeyValueDeserializationSchema(true),
