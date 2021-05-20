@@ -21,7 +21,7 @@ public class StreamKafka {
         DataStreamSource<ObjectNode> dataStreamSource = stenv.addSource(new FlinkKafkaConsumer<>("topic_1",
                 new JSONKeyValueDeserializationSchema(true),
                 PropertiesUtil.getConsumerProperties()));
-//如果是objetdata 类型的 则输出字段是
+//如果是objetNode 类型的 则输出字段是
 //         {"value":{"name":"nihao","age":12,"day":"20210518"},"metadata":{"offset":2,"topic":"topic_1","partition":0}}
         dataStreamSource.map(new MapFunction<ObjectNode, Object>() {
             @Override
