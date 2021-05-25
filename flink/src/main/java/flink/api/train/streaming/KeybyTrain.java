@@ -68,7 +68,7 @@ public class KeybyTrain {
         }
     }
     public static void main(String[] args) throws Exception {
-        StreamExecutionEnvironment stenv=StreamExecutionEnvironment.getExecutionEnvironment().setParallelism(1);
+        StreamExecutionEnvironment stenv=StreamExecutionEnvironment.getExecutionEnvironment();
 //
 
         DataStream<String> control = stenv
