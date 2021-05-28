@@ -1,15 +1,33 @@
 package flink.api.train.streaming;
 
-import flinksql.Person;
-import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
+import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.configuration.Configuration;
+import org.apache.flink.core.fs.CloseableRegistry;
+import org.apache.flink.metrics.MetricGroup;
+import org.apache.flink.runtime.execution.Environment;
+import org.apache.flink.runtime.query.TaskKvStateRegistry;
+import org.apache.flink.runtime.state.*;
+import org.apache.flink.runtime.state.filesystem.FsStateBackend;
+import org.apache.flink.runtime.state.ttl.TtlTimeProvider;
 import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.RichCoFlatMapFunction;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.triggers.Trigger;
+import org.apache.flink.streaming.api.windowing.triggers.TriggerResult;
+import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
+
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.function.Consumer;
 
 public class KeybyTrain {
 
@@ -71,6 +89,8 @@ public class KeybyTrain {
         StreamExecutionEnvironment stenv=StreamExecutionEnvironment.getExecutionEnvironment();
 //
 
+//        stenv.setStateBackend(new FsStateBackend("sds"));
+
         DataStream<String> control = stenv
                 .fromElements("cccc","cccc","Apache","DROP", "IGNORE","aaaa")
                 .keyBy(x -> x);
@@ -81,12 +101,23 @@ public class KeybyTrain {
                 .keyBy(x -> x);
 //        streamOfWords.print("=========");
 
-        control
-                .connect(streamOfWords)
-                .flatMap(new ControlFunction())
-                .print("程序运行结果为：");
 
-        System.out.println(stenv.getParallelism());
+        streamOfWords.keyBy(x->x).window(TumblingEventTimeWindows.of(Time.seconds(5l)));
+
+        stenv
+                .fromElements( 1,2,34,5,6,8,9,3,3,65,25,34,45,2,2)
+        .keyBy(x -> x).countWindow(2).sum(0).
+                print("================");
+
+
+
+
+//        control
+//                .connect(streamOfWords)
+//                .flatMap(new ControlFunction())
+//                .print("程序运行结果为：");
+
+//        System.out.println(a+"==============");
         stenv.execute();
     }
 }

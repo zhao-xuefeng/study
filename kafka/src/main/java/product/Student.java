@@ -1,12 +1,10 @@
-package product;
+package kafka;
 
 public class Student {
     private Integer id;
     private String name;
     private String address;
     private double score;
-
-
     public Integer getId() {
         return id;
     }
@@ -39,4 +37,3 @@ public class Student {
         this.score = score;
     }
 }
-
