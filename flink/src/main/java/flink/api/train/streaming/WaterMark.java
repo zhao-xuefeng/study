@@ -26,7 +26,9 @@ public class WaterMark {
                 return new Tuple2<String,Long>(key,values);
             }
         });
-        // TODO: 2021/5/28  生成相应的key value 然后设置watermark 进行测试  实践体验 
+//        博文链接
+        //https://blog.csdn.net/sxiaobei/article/details/81147723?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
+        // TODO: 2021/5/28  生成相应的key value 然后设置watermark 进行测试  实践体验
 
 
 
