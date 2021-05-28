@@ -9,15 +9,11 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.Obje
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-
 import org.apache.flink.streaming.util.serialization.JSONKeyValueDeserializationSchema;
-
-
 
 public class StreamKafka {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment stenv = StreamExecutionEnvironment.getExecutionEnvironment();
-//
         DataStreamSource<ObjectNode> dataStreamSource = stenv.addSource(new FlinkKafkaConsumer<>("topic_1",
                 new JSONKeyValueDeserializationSchema(true),
                 PropertiesUtil.getConsumerProperties()));

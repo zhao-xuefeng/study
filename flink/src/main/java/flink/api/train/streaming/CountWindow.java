@@ -25,8 +25,9 @@ public class CountWindow {
         source.print("-----");
         source.keyBy(x->x.f0).countWindow(2).sum(1).print("==========");
 
+//  带时间戳的滚动窗口，还没有调计算方法
 
-        source.keyBy(x->x.f0).window(TumblingEventTimeWindows.of(Time.seconds(5l)));
+//        source.keyBy(x->x.f0).window(TumblingEventTimeWindows.of(Time.seconds(5l)));
         stenv.execute();
     }
 

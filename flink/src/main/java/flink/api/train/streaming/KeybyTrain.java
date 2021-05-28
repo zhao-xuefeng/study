@@ -88,9 +88,6 @@ public class KeybyTrain {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment stenv=StreamExecutionEnvironment.getExecutionEnvironment();
 //
-
-//        stenv.setStateBackend(new FsStateBackend("sds"));
-
         DataStream<String> control = stenv
                 .fromElements("cccc","cccc","Apache","DROP", "IGNORE","aaaa")
                 .keyBy(x -> x);
@@ -102,20 +99,15 @@ public class KeybyTrain {
 //        streamOfWords.print("=========");
 
 
-        streamOfWords.keyBy(x->x).window(TumblingEventTimeWindows.of(Time.seconds(5l)));
-
-        stenv
-                .fromElements( 1,2,34,5,6,8,9,3,3,65,25,34,45,2,2)
-        .keyBy(x -> x).countWindow(2).sum(0).
-                print("================");
 
 
 
 
-//        control
-//                .connect(streamOfWords)
-//                .flatMap(new ControlFunction())
-//                .print("程序运行结果为：");
+
+        control
+                .connect(streamOfWords)
+                .flatMap(new ControlFunction())
+                .print("程序运行结果为：");
 
 //        System.out.println(a+"==============");
         stenv.execute();
