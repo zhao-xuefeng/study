@@ -31,6 +31,7 @@ public class RichFunction  extends RichSourceFunction {
     public class RichMap extends RichMapFunction<String,String>{
         private MapState mapState=null;
 
+
         @Override
         public void open(Configuration parameters) throws Exception {
             super.open(parameters);
