@@ -32,7 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-
+/*
+* 推荐watermark2的写法
+* */
 public class WaterMark {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -62,14 +64,14 @@ public class WaterMark {
 
         SingleOutputStreamOperator<Tuple2<String, Long>> waterMarks = da.assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks<Tuple2<String, Long>>() {
             private Watermark watermark = null;
-            private long currentMaxTimestamp = 0L;
             private long maxOutOfOrderness = 5000L; //最大允许的乱序时间是5s
+            private long currentMaxTimestamp =  Long.MIN_VALUE +maxOutOfOrderness+ 1;
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             @Override
             public long extractTimestamp(Tuple2<String, Long> element, long recordTimestamp) {
                 long timestamp = element.f1;
                 currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp);
-                long waterMarks=Long.valueOf(watermark.getTimestamp());
+                long waterMarks=Long.valueOf(watermark.getTimestamp()); // 这个写法因为不知道先执行谁会报空指针异常
                 String waterMakesDate=waterMarks>-5000l?format.format(waterMarks):watermark.toString();
 //                System.out.println("timestamp:" + element.f0 + "," + element.f1 + "|" +"当前时间："+ format.format(element.f1) + "," + currentMaxTimestamp + "|" + "当前最大时间："+format.format(currentMaxTimestamp) + "," + watermark.toString()+"----");
                 System.out.println("timestamp:" + element.f0 + "," + element.f1 + "|" +"当前时间："+ format.format(element.f1) + "," + currentMaxTimestamp + "|" + "当前最大时间："+format.format(currentMaxTimestamp) + "," + watermark.toString()+"|"+"水位："+waterMakesDate);
@@ -79,7 +81,7 @@ public class WaterMark {
             @Nullable
             @Override
             public Watermark getCurrentWatermark() {
-                return watermark = new Watermark(currentMaxTimestamp - maxOutOfOrderness);
+                return watermark = new Watermark(currentMaxTimestamp - maxOutOfOrderness-1);
             }
         });
 
@@ -87,7 +89,8 @@ public class WaterMark {
 //                .<Tuple2<String, Long>>forBoundedOutOfOrderness(Duration.ofSeconds(20))
 //                .withTimestampAssigner((event, timestamp) -> event.f1));
         KeyedStream<Tuple2<String, Long>, String> ds = waterMarks.keyBy(x -> x.f0);
-        WindowedStream ws = ds.window(TumblingEventTimeWindows.of(Time.seconds(5)));
+        WindowedStream ws = ds.window(TumblingEventTimeWindows.of(Time.seconds(5l)));
+
 
         ws.apply(new WindowFunction<Tuple2<String,Long>, Tuple7<String,String, Integer,String,String,String,String>,String, TimeWindow >() {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -112,16 +115,8 @@ public class WaterMark {
 
 
 
-//        da.assignTimestampsAndWatermarks(WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5l)));
-//        da.assignTimestampsAndWatermarks(WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5l)).withTimestampAssigner(new TimestampAssignerSupplier<Object>() {
-//            @Override
-//            public TimestampAssigner<Object> createTimestampAssigner(Context context) {
-//                return null;
-//            }
-//        }))
 //        博文链接
         //https://blog.csdn.net/sxiaobei/article/details/81147723?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
-        // TODO: 2021/5/28  生成相应的key value 然后设置watermark 进行测试  实践体验
 
 
     }
