@@ -66,8 +66,7 @@ public class KeybyTrain {
 
         }
 
-
-        //flatmap1  与flatmap2
+        //flatmap1  与flatmap2  单线程是这样的，
         // 每个元素顺序比较若在1里面的出现过得元素且在2里面比这个元素的位置靠后或等于才会改变flatmap2的状态，
         // 也可以理解为 这时候的key状态更新
         @Override
@@ -94,20 +93,13 @@ public class KeybyTrain {
 //        control.print("----------");
 
         DataStream<String> streamOfWords = stenv
-                .fromElements( "IGNORE" ,"aaaaa","DROP","Apache",  "Flink")
+                .fromElements( "IGNORE" ,"aaaa","DROP","Apache",  "Flink")
                 .keyBy(x -> x);
 //        streamOfWords.print("=========");
-
-
-
-
-
-
-
         control
                 .connect(streamOfWords)
-                .flatMap(new ControlFunction())
-                .print("程序运行结果为：");
+                .flatMap(new ControlFunction()).setParallelism(1)
+                .print("程序运行结果为：").setParallelism(1);
 
 //        System.out.println(a+"==============");
         stenv.execute();
