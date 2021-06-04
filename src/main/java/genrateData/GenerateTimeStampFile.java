@@ -1,4 +1,4 @@
-package generate;
+package genrateData;
 
 import org.joda.time.DateTime;
 
