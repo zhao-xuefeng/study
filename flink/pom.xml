@@ -50,28 +50,28 @@
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-scala_${flink.scala.version}</artifactId>
+            <artifactId>flink-streaming-scala_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-scala_${flink.scala.version}</artifactId>
+            <artifactId>flink-scala_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-jdbc -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-jdbc_${flink.scala.version}</artifactId>
+            <artifactId>flink-jdbc_${scala.version}</artifactId>
             <version>1.10.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka_${flink.scala.version}</artifactId>
+            <artifactId>flink-connector-kafka_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
@@ -93,21 +93,21 @@
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-api-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-api-scala_${flink.scala.version}</artifactId>
+            <artifactId>flink-table-api-scala_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-planner_${flink.scala.version}</artifactId>
+            <artifactId>flink-table-planner_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner-blink -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-planner-blink_${flink.scala.version}</artifactId>
+            <artifactId>flink-table-planner-blink_${scala.version}</artifactId>
             <version>${flink.version}</version>
 
         </dependency>
@@ -117,7 +117,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_${flink.scala.version}</artifactId>
+            <artifactId>flink-clients_${scala.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
 
