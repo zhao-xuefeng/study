@@ -1,4 +1,4 @@
-package flink.business_scenarios;
+package flink.business_scenarios.orderdemo;
 
 import flink.api.train.streaming.RichFunction;
 import lombok.AllArgsConstructor;

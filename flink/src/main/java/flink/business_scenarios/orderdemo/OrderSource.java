@@ -1,4 +1,4 @@
-package flink.business_scenarios;
+package flink.business_scenarios.orderdemo;
 
 import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 

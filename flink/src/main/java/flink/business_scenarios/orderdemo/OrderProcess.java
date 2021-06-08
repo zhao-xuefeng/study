@@ -1,4 +1,4 @@
-package flink.business_scenarios;
+package flink.business_scenarios.orderdemo;
 
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
