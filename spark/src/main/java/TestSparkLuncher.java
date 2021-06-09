@@ -43,6 +43,7 @@ public class TestSparkLuncher {
 
     public static void main(String[] args) throws IOException, YarnException, InterruptedException {
         HashMap env = new HashMap();
+//        本地连接 hdfs user 设置，这个也需要在环境变量里添加
         System.setProperty("HADOOP_USER_NAME","hadoop");
         //这两个属性必须设置
         env.put("HADOOP_CONF_DIR", "D:\\bonc\\soft\\hadoop\\hadoop-2.6.1\\etc\\hadoop");
